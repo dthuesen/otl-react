@@ -1,0 +1,23 @@
+{
+  "name": "react-rapid",
+  "version": "0.0.1",
+  "description": "react rapud cours on youtube by LearnCode.academy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "webpack",
+    "nodejs",
+    "node"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "lodash": "^4.15.0",
+    "webpack": "^1.13.2"
+  }
+}
