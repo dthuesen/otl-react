@@ -38,5 +38,7 @@ module.exports = {
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
         new ExtractTextPlugin("style.css", {allChunks: false}),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin(),
     ],
 };
