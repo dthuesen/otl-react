@@ -4,11 +4,9 @@
   "description": "My first React app based on my concept for an OPL (open positions list) but with a slightly different name Open Topics List, because it make more sense.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node server.js",
     "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prod": "NODE_ENV=production node server.js",
-    "postinstall": "webpack -p"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "react",
@@ -32,7 +30,6 @@
     "babel-preset-stage-0": "^6.5.0",
     "css-loader": "^0.25.0",
     "extract-text-webpack-plugin": "^1.0.1",
-    "express": "^4.13.3",
     "firebase": "^3.4.0",
     "lodash": "^4.16.0",
     "mongoose": "^4.6.1",
