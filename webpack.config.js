@@ -8,8 +8,7 @@ module.exports = {
     devtool: debug ? "inline-sourcemap" : null,
     // entry: "./js/client.js",
     entry: [
-        'webpack-hot-middleware/client',
-        './src/index'
+        './js/client.js'
     ],
     module: {
         loaders: [{
