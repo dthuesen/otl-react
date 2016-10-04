@@ -30,10 +30,13 @@ module.exports = {
     //     path: __dirname + "/src/",
     //     filename: "client.min.js"
     // },
-        output: {
-        path: path.join(__dirname, 'public'),
+    output: {
+        path: __dirname,
         filename: 'bundle.js',
-        publicPath: '/public/'
+        publicPath: '/'
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
     },
 
     plugins: debug ? [] : [
