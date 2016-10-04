@@ -4,6 +4,7 @@
   "description": "My first React app based on my concept for an OPL (open positions list) but with a slightly different name Open Topics List, because it make more sense.",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "./node_modules/.bin/webpack-dev-server --content-base src --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

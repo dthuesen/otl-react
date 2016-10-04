@@ -1,4 +1,5 @@
 var debug = process.env.NODE_ENV !== "production";
+const path = require('path')
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -22,10 +23,16 @@ module.exports = {
             loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
         ]
     },
-    output: {
-        path: __dirname + "/src/",
-        filename: "client.min.js"
+    // output: {
+    //     path: __dirname + "/src/",
+    //     filename: "client.min.js"
+    // },
+        output: {
+        path: path.join(__dirname, 'public'),
+        filename: 'bundle.js',
+        publicPath: '/public/'
     },
+
     plugins: debug ? [] : [
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
