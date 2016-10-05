@@ -60,6 +60,7 @@
   },
   "dependencies": {
     "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^6.0.0",    
     "browserify": "^11.2.0",
     "classnames": "^2.1.2",
     "express": "^4.13.3",
