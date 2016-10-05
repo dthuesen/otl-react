@@ -26,6 +26,7 @@ var config = {
       notes, 
       inSprint, 
       updatedAt, 
+      createdAt, 
       client) {
   firebase.database().ref('otlReact/' + id).set({
     username: name,

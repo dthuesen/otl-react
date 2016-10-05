@@ -151,6 +151,14 @@ export default class TopicsTable extends React.Component {
 
   render() {
 
+    var now = new Date();
+    var month = now.getMonth();    9 // liefert 0 - 11
+    var year = now.getFullYear(); 2016 // YYYY (startet nicht bei 0)
+    var day = now.getDate();     2 // liefert 1 - 31
+    var minutes = now.getMinutes(); 
+    var hour = now.getHours();    13 // liefert 0 - 23
+    var actualDate = day + "." + month + "." + year + ", " + hour + ":" + minutes + " h";
+
     // functions for table manipulation
     function onRowSelect(row, isSelected){
       console.log(row);
@@ -165,14 +173,6 @@ export default class TopicsTable extends React.Component {
     function onAfterSaveCell(row, cellName, cellValue) {
       var cellProp = cellName;
       var row = row;
-      var now = new Date();
-      var month = now.getMonth();    9 // liefert 0 - 11
-      var year = now.getFullYear(); 2016 // YYYY (startet nicht bei 0)
-      var day = now.getDate();     2 // liefert 1 - 31
-      var minutes = now.getMinutes(); 
-      var hour = now.getHours();    13 // liefert 0 - 23
-      var actualDate = day + "." + month + "." + year + ", " + hour + ":" + minutes + " h"
-
       // method for updating a cell
       const updateTopic = () => fb.child(`otlReact/${row.key}`)
                                   .update({
@@ -184,16 +184,31 @@ export default class TopicsTable extends React.Component {
       }; 
       updateTopic();
     }
-    function onAddRow(row){
-      alert(row)
-    }
+    
     function onAfterInsertRow(row) {
       let newRowStr = '';
 
       for (const prop in row) {
         newRowStr += prop + ': ' + row[prop] + ' \n';
       }
-      alert('The new row is:\n ' + newRowStr);
+      // alert('The new row is:\n ' + newRowStr);
+
+      // Get a key for a new Post.
+      var newTopicKey = fb.child('otlReact').push().key;
+      alert('newTopicKey: ' + newTopicKey);
+
+      var newRow = row;
+      newRow.createdAt = actualDate;
+      
+      // Write the new post's data simultaneously in the posts list and the user's post list.
+      var updates = {};
+      // updates[newTopicKey] = row;
+      updates[newTopicKey] = newRow;
+      console.log(updates);
+
+      return fb.child('otlReact').update(updates);
+        
+
     }
     
     // properties and options
@@ -233,15 +248,17 @@ export default class TopicsTable extends React.Component {
         {/*  <h1><b>Topics: {this.state.topics.description}</b></h1> */}
         <h4><b>TopicsTable</b> componente</h4>
         <BootstrapTable data={this.state.topics} 
-                        insertRow={true} options={options} 
+                        insertRow={true} 
+                        options={options} 
                         tableHeaderClass="td-header" 
-                        tableBodyClass="td-body" cellEdit={cellEditProp} 
+                        tableBodyClass="td-body" 
+                        cellEdit={cellEditProp} 
                         selectRow={selectRowProp} 
                         search={true} 
                         deleteRow={true} 
                         striped={true} 
                         pagination={true} i
-                        gnoreSinglePage={true} 
+                        ignoreSinglePage={true} 
                         searchPlaceholder={"Search ..."} 
                         >
           <TableHeaderColumn width="70" dataField="shortList" dataSort={true} editable={{type:'select', options:{values: choseShortlist}}} >Short List</TableHeaderColumn>
@@ -260,6 +277,7 @@ export default class TopicsTable extends React.Component {
           <TableHeaderColumn width="170" dataField="notes" dataSort={true} editable={{type:'textarea'}} >Notes</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="inSprint" dataSort={true} >In Sprint</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="updatedAt" dataSort={true} >Updated At</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="createdAt" dataSort={true} >Created At</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="client" dataSort={true} editable={{type:'select', options:{values: availableClients}}} >Client</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="key" isKey={true} autoValue={true} hidden={true} hiddenOnInsert={true} >Key</TableHeaderColumn>
         </BootstrapTable>
