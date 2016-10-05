@@ -238,9 +238,9 @@ export default class TopicsTable extends React.Component {
       paginationShowsTotal: true,
       noDataText: '-',
       hideSizePerPage: false,
-      sizePerPageList: [3, 10, 15, 25, 40, 60],
+      sizePerPageList: [3, 5, 10, 15, 25, 40, 60],
       clearSearch: true,
-      sizePerPage: 90,
+      sizePerPage: 5,
       onAddRow: (row) => { console.log("on add row")},
     }
     return ( 
