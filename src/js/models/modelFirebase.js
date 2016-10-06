@@ -10,7 +10,7 @@ var config = {
 
   // Writing data to DB
   function writeUserData(
-      id,
+      uid,
       no, 
       summary, 
       description, 
@@ -27,12 +27,37 @@ var config = {
       inSprint, 
       updatedAt, 
       createdAt, 
-      client) {
-  firebase.database().ref('otlReact/' + id).set({
-    username: name,
-    email: email,
-    profile_picture : imageUrl
-  });
+      client
+      );
+
+
+  // BACKUP 
+  // // Writing data to DB
+  // function writeUserData(
+  //     _tableKey,
+  //     no, 
+  //     summary, 
+  //     description, 
+  //     option, component, 
+  //     category, 
+  //     prio, 
+  //     responsive, 
+  //     state, 
+  //     costModel, 
+  //     affectsVersion, 
+  //     issueTicket, 
+  //     ticketText, 
+  //     notes, 
+  //     inSprint, 
+  //     updatedAt, 
+  //     createdAt, 
+  //     client) {
+  // firebase.database().ref('otlReact/' + id).set({
+  //   username: name,
+  //   email: email,
+  //   profile_picture : imageUrl
+  // });
+
 }
 
 // OTL table columns:

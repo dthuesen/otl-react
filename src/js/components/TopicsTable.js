@@ -21,7 +21,7 @@ const fb = firebase
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
 // static topics for table
-const Topics = [
+const staticTopics = [
       {
         id: 1,
         "shortList": "YES",
@@ -144,6 +144,7 @@ export default class TopicsTable extends React.Component {
         topics: topics
       });
       console.log("----------------")
+      console.log("in 'in constructor' - this.state.topics: ");
       console.log(this.state.topics);
       console.log("----------------")
     });
@@ -158,6 +159,8 @@ export default class TopicsTable extends React.Component {
     var minutes = now.getMinutes(); 
     var hour = now.getHours();    13 // liefert 0 - 23
     var actualDate = day + "." + month + "." + year + ", " + hour + ":" + minutes + " h";
+    const dataTopics = this.state.topics;
+
 
     // functions for table manipulation
     function onRowSelect(row, isSelected){
@@ -167,7 +170,7 @@ export default class TopicsTable extends React.Component {
     }
 
     function onSelectAll(isSelected){
-      console.log("is select all: " + isSelected);
+      console.log("is select: " + isSelected);
     }
 
     function onAfterSaveCell(row, cellName, cellValue) {
@@ -186,32 +189,31 @@ export default class TopicsTable extends React.Component {
     }
     
     function onAfterInsertRow(row) {
-      let newRowStr = '';
-
-      for (const prop in row) {
-        newRowStr += prop + ': ' + row[prop] + ' \n';
-      }
-      // alert('The new row is:\n ' + newRowStr);
-
       // Get a key for a new Post.
       var newTopicKey = fb.child('otlReact').push().key;
-      alert('newTopicKey: ' + newTopicKey);
+      console.log('newTopicKey: ');
+      console.log(newTopicKey);
 
       var newRow = row;
       newRow.createdAt = actualDate;
-      
+
       // Write the new post's data simultaneously in the posts list and the user's post list.
       var updates = {};
       // updates[newTopicKey] = row;
       updates[newTopicKey] = newRow;
-      console.log(updates);
 
       return fb.child('otlReact').update(updates);
-        
-
+    }
+    function handleOnDeleteRow(row) {
+      console.log("handleOnDeleteRow - row: ");
+      console.log(row);
+    }
+    function onAfterDeleteRow(rowKeys) {
+      console.log("onAfterDeleteRow - rowKeys: ");
+      console.log(rowKeys);
     }
     
-    // properties and options
+    // PROPERTIES AND OPTIONS
     var cellEditProp = {
       mode: "click",
       blurToSave: true,
@@ -223,18 +225,12 @@ export default class TopicsTable extends React.Component {
       bgColor: "rgb(238, 193, 213)",
       onSelect: onRowSelect,
       onSelectAll: onSelectAll
-    };
-
-    function addAddRow(row) {
-      var result = this.refs.table.handleAddRowAtBegin(row);
-      if(result){
-        console.log(result);
-      }
-    }
-    const dataTopics = this.state.topics;
+    };    
 
     const options = {
       afterInsertRow: onAfterInsertRow,
+      onDeleteRow: handleOnDeleteRow,
+      afterDeleteRow: onAfterDeleteRow,
       paginationShowsTotal: true,
       noDataText: '-',
       hideSizePerPage: false,
@@ -247,7 +243,7 @@ export default class TopicsTable extends React.Component {
       <div>
         {/*  <h1><b>Topics: {this.state.topics.description}</b></h1> */}
         <h4><b>TopicsTable</b> componente</h4>
-        <BootstrapTable data={this.state.topics} 
+        <BootstrapTable data={dataTopics} 
                         insertRow={true} 
                         options={options} 
                         tableHeaderClass="td-header" 
@@ -261,8 +257,8 @@ export default class TopicsTable extends React.Component {
                         ignoreSinglePage={true} 
                         searchPlaceholder={"Search ..."} 
                         >
-          <TableHeaderColumn width="70" dataField="shortList" dataSort={true} editable={{type:'select', options:{values: choseShortlist}}} >Short List</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="no" dataSort={true} >No</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="shortList" dataSort={true} editable={{type:'select', options:{values: choseShortlist}}} hiddenOnInsert={true} >Short List</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="no" dataSort={true} hiddenOnInsert={true} editable={false} >No</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="summary" dataSort={true} editable={{type:'textarea'}} >Summary</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="option" dataSort={true} editable={{type:'textarea'}} >Optional Comments</TableHeaderColumn>
           <TableHeaderColumn width="80" dataField="component" dataSort={true} editable={{type:'select', options:{values: componentTypes}}} >Affected Component</TableHeaderColumn>
@@ -271,15 +267,15 @@ export default class TopicsTable extends React.Component {
           <TableHeaderColumn width="70" dataField="responsive" dataSort={true} editable={{type:'select', options:{values: responsiveTypes}}} >Resp. Role</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="state" dataSort={true} editable={{type:'select', options:{values: stateTypes}}} >State</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="costModel" dataSort={true} editable={{type:'select', options:{values: costModelTypes}}} >Cost Model</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="affectsVersion" dataSort={true} >Affects Version</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="issueTicket" dataSort={true} >Ticket in JIRA</TableHeaderColumn>
-          <TableHeaderColumn width="190" dataField="ticketText" dataSort={true} editable={{type:'textarea'}} >Ticket Text</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="affectsVersion" dataSort={true} hiddenOnInsert={true} >Affects Version</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="issueTicket" dataSort={true} hiddenOnInsert={true} >Ticket in JIRA</TableHeaderColumn>
+          <TableHeaderColumn width="190" dataField="ticketText" dataSort={true} editable={{type:'textarea'}} hiddenOnInsert={true} >Ticket Text</TableHeaderColumn>
           <TableHeaderColumn width="170" dataField="notes" dataSort={true} editable={{type:'textarea'}} >Notes</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="inSprint" dataSort={true} >In Sprint</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="updatedAt" dataSort={true} >Updated At</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="createdAt" dataSort={true} >Created At</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="updatedAt" dataSort={true} hiddenOnInsert={true} >Updated At</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="createdAt" dataSort={true} hiddenOnInsert={true} >Created At</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="client" dataSort={true} editable={{type:'select', options:{values: availableClients}}} >Client</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="key" isKey={true} autoValue={true} hidden={true} hiddenOnInsert={true} >Key</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="key" isKey={true} autoValue={true} hidden={false} hiddenOnInsert={false} >key</TableHeaderColumn>
         </BootstrapTable>
       
       </div>   

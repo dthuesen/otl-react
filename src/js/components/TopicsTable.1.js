@@ -136,6 +136,8 @@ export default class TopicsTable extends React.Component {
         .map((topicKey) => {
           var cloned = _.clone(topicsVal[topicKey]);
           cloned.key = topicKey;
+          console.log("cloned in constructor: ");
+          console.log(cloned);
           return cloned;
         })
         .value();
