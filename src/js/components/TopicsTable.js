@@ -122,7 +122,7 @@ var shortListType = {
   "no": "no"
 };
 
-
+let counter = 0;
 
 export default class TopicsTable extends React.Component {
 
@@ -191,11 +191,17 @@ export default class TopicsTable extends React.Component {
     }
     
     function onAfterInsertRow(row) {
-      // Get a key for a new Post.
-      var newTopicKey = fb.child('otlReact').push().key;
-      console.log('newTopicKey: ');
-      console.log(newTopicKey);
+      // increasing counter
+      counter += 1;
 
+      // Grabbing the table 'otlReact'
+      let otlReact = fb.child('otlReact');
+
+      // Get a key for a new Post.
+      var newTopicKey = otlReact.push().key;
+
+      
+      // Getting the new row
       var newRow = row;
       newRow.createdAt = actualDate;
 
@@ -204,13 +210,43 @@ export default class TopicsTable extends React.Component {
       // updates[newTopicKey] = row;
       updates[newTopicKey] = newRow;
 
-      return fb.child('otlReact').update(updates)
+      // increasing the number counter
+      // TODO :: Sync with db for persistence
+      let dbCounter = fb.child('counter');
+
+      dbCounter.once('value', function(snapshot) {
+        let dbCounterRead = snapshot.val();
+        console.log("dbCounterRead");
+        console.log(dbCounterRead);
+
+        let dbCounterVal = dbCounterRead + 1;
+        console.log("dbCounterVal: ");
+        console.log(dbCounterVal);
+        // Save new incremented number to DB
+        var dbCounterUpdates = {}
+        dbCounterUpdates['counter'] = dbCounterVal;
+        fb.update(dbCounterUpdates);
+        
+        fb.child(`otlReact/${newTopicKey}`).update({number: dbCounterVal}, response => response);
+
+        // dbCounter.once('value', function(snap) {
+        //   console.log("snap.val(): ");
+        //   console.log(snap.val());
+          
+        //   row.number = snap.val();
+        // });
+
+      });
+
+      return otlReact
+        .update(updates)
         .then(function(){
             console.log("Insertion of row succeeded.")
           })
           .catch(function(error) {
             console.log("Insertion of row failed: " + error.message)
           });
+      
     }
     function handleOnDeleteRow(row) {
       console.log("handleOnDeleteRow - row: ");
@@ -260,8 +296,7 @@ export default class TopicsTable extends React.Component {
       hideSizePerPage: false,
       sizePerPageList: [3, 5, 10, 15, 25, 40, 60],
       clearSearch: true,
-      sizePerPage: 5,
-      onAddRow: (row) => { console.log("on add row")},
+      sizePerPage: 25
     }
     return ( 
       <div>
@@ -282,7 +317,7 @@ export default class TopicsTable extends React.Component {
                         searchPlaceholder={"Search ..."} 
                         >
           <TableHeaderColumn width="70" dataField="shortList" dataSort={true} editable={{type:'select', options:{values: choseShortlist}}} hiddenOnInsert={true} >Short List</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="no" dataSort={true} hiddenOnInsert={true} editable={false} >No</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="number" dataSort={true} hiddenOnInsert={true} editable={false} >#</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="summary" dataSort={true} editable={{type:'textarea'}} >Summary</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="option" dataSort={true} editable={{type:'textarea'}} >Optional Comments</TableHeaderColumn>
           <TableHeaderColumn width="80" dataField="component" dataSort={true} editable={{type:'select', options:{values: componentTypes}}} >Affected Component</TableHeaderColumn>
