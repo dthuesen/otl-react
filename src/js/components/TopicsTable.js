@@ -12,10 +12,14 @@ const fbconfig = {
     storageBucket: "otl-react.appspot.com",
     messagingSenderId: "531210504974"
 };
-const fb = firebase  
+
+const fireb = firebase  
       .initializeApp(fbconfig)
-      .database()
+      .database();
+
+const fb = fireb  
       .ref();
+
 
 // ract-bootstrap-table from allenfang.github.io/react-bootstrap-table/start.html
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
@@ -143,10 +147,6 @@ export default class TopicsTable extends React.Component {
       this.setState({
         topics: topics
       });
-      console.log("----------------")
-      console.log("in 'in constructor' - this.state.topics: ");
-      console.log(this.state.topics);
-      console.log("----------------")
     });
   }
 
@@ -165,12 +165,14 @@ export default class TopicsTable extends React.Component {
     // functions for table manipulation
     function onRowSelect(row, isSelected){
       console.log(row);
-      console.log("selected: " + isSelected)
-      console.log(this)
+      console.log("Is minimum one row selected?: ")
+      if(isSelected) { console.log("YES"); } else { console.log("NO"); }
     }
 
     function onSelectAll(isSelected){
-      console.log("is select: " + isSelected);
+      console.log("Are all rows selected?: ");
+      if(isSelected) { console.log("YES"); } else { console.log("NO"); }
+      
     }
 
     function onAfterSaveCell(row, cellName, cellValue) {
@@ -202,7 +204,13 @@ export default class TopicsTable extends React.Component {
       // updates[newTopicKey] = row;
       updates[newTopicKey] = newRow;
 
-      return fb.child('otlReact').update(updates);
+      return fb.child('otlReact').update(updates)
+        .then(function(){
+            console.log("Insertion of row succeeded.")
+          })
+          .catch(function(error) {
+            console.log("Insertion of row failed: " + error.message)
+          });
     }
     function handleOnDeleteRow(row) {
       console.log("handleOnDeleteRow - row: ");
@@ -211,6 +219,22 @@ export default class TopicsTable extends React.Component {
     function onAfterDeleteRow(rowKeys) {
       console.log("onAfterDeleteRow - rowKeys: ");
       console.log(rowKeys);
+
+      rowKeys.forEach(function(currentValue, index, originalArray){
+        console.log("currentValue: ");
+        console.log(currentValue);
+
+        var topicToDelete = fb.child('otlReact/' + currentValue);
+        console.log("topicToDelete: ");
+        console.log(topicToDelete);
+        topicToDelete.remove()
+          .then(function(){
+            console.log("Remove succeeded.")
+          })
+          .catch(function(error) {
+            console.log("Remove failed: " + error.message)
+          });
+      });
     }
     
     // PROPERTIES AND OPTIONS
@@ -265,17 +289,17 @@ export default class TopicsTable extends React.Component {
           <TableHeaderColumn width="76" dataField="category" dataSort={true} editable={{type:'select', options:{values: categoryTypes}}} >Category</TableHeaderColumn>
           <TableHeaderColumn width="76" dataField="prio" dataSort={true} editable={{type:'select', options:{values: priorityTypes}}} >Priority</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="responsive" dataSort={true} editable={{type:'select', options:{values: responsiveTypes}}} >Resp. Role</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="state" dataSort={true} editable={{type:'select', options:{values: stateTypes}}} >State</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="state" dataSort={true} editable={{type:'select', options:{values: stateTypes}}} hiddenOnInsert={true} >State</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="costModel" dataSort={true} editable={{type:'select', options:{values: costModelTypes}}} >Cost Model</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="affectsVersion" dataSort={true} hiddenOnInsert={true} >Affects Version</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="issueTicket" dataSort={true} hiddenOnInsert={true} >Ticket in JIRA</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="ticketText" dataSort={true} editable={{type:'textarea'}} hiddenOnInsert={true} >Ticket Text</TableHeaderColumn>
           <TableHeaderColumn width="170" dataField="notes" dataSort={true} editable={{type:'textarea'}} >Notes</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="inSprint" dataSort={true} >In Sprint</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="inSprint" dataSort={true} hiddenOnInsert={true} >In Sprint</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="updatedAt" dataSort={true} hiddenOnInsert={true} >Updated At</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="createdAt" dataSort={true} hiddenOnInsert={true} >Created At</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="client" dataSort={true} editable={{type:'select', options:{values: availableClients}}} >Client</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="key" isKey={true} autoValue={true} hidden={false} hiddenOnInsert={false} >key</TableHeaderColumn>
+          <TableHeaderColumn width="70" dataField="key" isKey={true} autoValue={true} hidden={true} hiddenOnInsert={true} >key</TableHeaderColumn>
         </BootstrapTable>
       
       </div>   
