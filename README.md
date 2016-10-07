@@ -13,3 +13,10 @@ Just ready features:
 * Color for table header
 * New column widths
 * Automatic date for "Created at"
+* Numbering with leading zeros
+* Numbering with client prefixes
+* Prefixing according to selected client in table
+* If client count in table is null a prefixed 8 digits zero count will be used
+
+TO DO:
+* Changing prefix if client selection on topic changes

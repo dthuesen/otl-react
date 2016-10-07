@@ -115,14 +115,13 @@ var costModelTypes = [
   "ROADMAP", "COST-SHARING", "CLIENT PROJECT"
 ];
 var availableClients = [
-  "O2", "Telefonica", "Bosch", "Norsk Tipping"
+  "O2", "Telefonica", "Bosch", "Norsk Tipping", "Comvendo", "andere"
 ]
 var shortListType = {
   "YES": "YES",
   "no": "no"
 };
 
-let counter = 0;
 
 export default class TopicsTable extends React.Component {
 
@@ -189,17 +188,64 @@ export default class TopicsTable extends React.Component {
       }; 
       updateTopic();
     }
+
+    // !!!!! TODO: filter for client prefixes and then getting last number count  
+    // !!!!!       for new selection and switching to that prefix in this row (or similar)                                           
+    // !!!!! ------------------------------------------------------------------------------
+
     
     function onAfterInsertRow(row) {
-      // increasing counter
-      counter += 1;
+
+      // TODO: retrieving client selection from input
+      console.log("cotent of 'row': ");
+      console.log(row);
+      let client = row.client;
+      console.log("client: ");
+      console.log(client);
+      console.log("===================================");
+      let counterPrefix = "";
+      let counterTableName = "";
+      switch(client) {
+        case "O2":
+            counterPrefix = "o2-";
+            counterTableName = "o2Counter";
+            console.log("Kunde: O2 - prefix ist jetzt: '" + counterPrefix + "'");
+            break;
+        case "Telefonica":
+            counterPrefix = "te--";
+            counterTableName = "telefonicaCounter";
+            console.log("Kunde: Telefonica - prefix ist jetzt: '" + counterPrefix + "'");
+            break;
+        case "Bosch":
+            counterPrefix = "bo-";
+            counterTableName = "boshCounter";
+            console.log("Kunde: Bosch - prefix ist jetzt: '" + counterPrefix + "'");
+            break;
+        case "Norsk Tipping":
+            counterPrefix = "nt-";
+            counterTableName = "norskTippingCounter";
+            console.log("Kunde: Norsk Tipping - prefix ist jetzt: '" + counterPrefix + "'");
+            break;
+        case "Comvendo":
+            counterPrefix = "co-";
+            counterTableName = "comvendoCounter";
+            console.log("Kunde: Comvendo - prefix ist jetzt: '" + counterPrefix + "'");
+            break;
+        case "andere":
+            counterPrefix = "yz-";
+            counterTableName = "yzOthersCounter";
+            console.log("Kunde: andere - prefix ist jetzt: '" + counterPrefix + "'");
+            break;
+        default:
+            console.log("NO MATCHING CLIENT!!!!!");
+      }  
+         
 
       // Grabbing the table 'otlReact'
       let otlReact = fb.child('otlReact');
 
       // Get a key for a new Post.
       var newTopicKey = otlReact.push().key;
-
       
       // Getting the new row
       var newRow = row;
@@ -212,9 +258,7 @@ export default class TopicsTable extends React.Component {
 
       //--> INCREASING THE NUMBER COUNTER <--//
       // Variable for changing counter by Client
-      let counterTable = 'o2counter';
-      let counterPrefix = 'o2-';
-
+      let counterTable = counterTableName;
 
       // Counter referenz in DB 
       let dbCounter = fb.child(counterTable);
@@ -231,7 +275,11 @@ export default class TopicsTable extends React.Component {
 
 
         // Slicing prefix from counter-string
-        let stringNumber = dbCounterReadString.substring(3);
+        let stringNumber = "";
+        if(dbCounterReadString == null) {
+          dbCounterReadString = counterPrefix + "00000000";
+        }
+        stringNumber = dbCounterReadString.substring(3);
         console.log("typeof stringnumber: ");
         console.log(typeof stringnumber);
         let unPrefixedCounter = parseInt(stringNumber);
@@ -266,9 +314,8 @@ export default class TopicsTable extends React.Component {
         dbCounterUpdates[counterTable] = prefixedCounter;
         fb.update(dbCounterUpdates);
         
+        // Update cell "number" with client prefixed counter 
         fb.child(`otlReact/${newTopicKey}`).update({number: prefixedCounter}, response => response);
-        //fb.child(`otlReact/${newTopicKey}`).update({number: dbCounterVal}, response => response);
-
 
       });
 
