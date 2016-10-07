@@ -44,4 +44,5 @@ TO DO:
 * User administration
 * Short list export
 * Pages: "Shortlist" (with filter), "Login"
+* Focus on first form field in form for new topic
 
