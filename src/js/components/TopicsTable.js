@@ -210,31 +210,65 @@ export default class TopicsTable extends React.Component {
       // updates[newTopicKey] = row;
       updates[newTopicKey] = newRow;
 
-      // increasing the number counter
-      // TODO :: Sync with db for persistence
-      let dbCounter = fb.child('counter');
+      //--> INCREASING THE NUMBER COUNTER <--//
+      // Variable for changing counter by Client
+      let counterTable = 'o2counter';
+      let counterPrefix = 'o2-';
 
+
+      // Counter referenz in DB 
+      let dbCounter = fb.child(counterTable);
+
+      // Checking counter if value with .once() -> snapshot 
+      // (with ".on()" would generate an infinite loop)
       dbCounter.once('value', function(snapshot) {
-        let dbCounterRead = snapshot.val();
-        console.log("dbCounterRead");
-        console.log(dbCounterRead);
+        
+        // Retrieving value of the snapshot 
+        // - the actual count in this property
+        let dbCounterReadString = snapshot.val();
+        console.log("typeof dbCounterReadString: ");
+        console.log(typeof dbCounterReadString);
 
-        let dbCounterVal = dbCounterRead + 1;
+
+        // Slicing prefix from counter-string
+        let stringNumber = dbCounterReadString.substring(3);
+        console.log("typeof stringnumber: ");
+        console.log(typeof stringnumber);
+        let unPrefixedCounter = parseInt(stringNumber);
+        console.log("unPrefixedCounter:");
+        console.log(unPrefixedCounter);
+        console.log("typeof unPrefixedCounter: ");
+        console.log(typeof unPrefixedCounter);
+
+        // Adding +1 to actual count
+        let dbCounterVal = unPrefixedCounter + 1;
         console.log("dbCounterVal: ");
         console.log(dbCounterVal);
+
+        // Generating leading zeros for counter
+        let paddedCount = pad(dbCounterVal, 8);
+        function pad(n, width, z) {
+          z = z || '0';
+          n = n + '';
+          return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n; 
+        }
+        console.log("paddedCount: ");
+        console.log(paddedCount);
+
+        // Concatenating prefix and count
+        let prefixedCounter = counterPrefix + paddedCount;
+        console.log(prefixedCounter);
+
         // Save new incremented number to DB
         var dbCounterUpdates = {}
-        dbCounterUpdates['counter'] = dbCounterVal;
+
+        //dbCounterUpdates['counter'] = dbCounterVal;
+        dbCounterUpdates[counterTable] = prefixedCounter;
         fb.update(dbCounterUpdates);
         
-        fb.child(`otlReact/${newTopicKey}`).update({number: dbCounterVal}, response => response);
+        fb.child(`otlReact/${newTopicKey}`).update({number: prefixedCounter}, response => response);
+        //fb.child(`otlReact/${newTopicKey}`).update({number: dbCounterVal}, response => response);
 
-        // dbCounter.once('value', function(snap) {
-        //   console.log("snap.val(): ");
-        //   console.log(snap.val());
-          
-        //   row.number = snap.val();
-        // });
 
       });
 
