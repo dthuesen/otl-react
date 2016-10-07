@@ -1,5 +1,6 @@
 import React from "react";
 
+
 // Composing
 import Header from "./Header"
 import Footer from "./Footer";
@@ -10,7 +11,7 @@ export default class Layout extends React.Component {
   render() {
     console.log("Layout is loaded");
     return (
-      <div>
+      <div className="container-layout">
         <Header />
         <h1>Layout component</h1>
         <TopicsTable />

@@ -393,7 +393,7 @@ export default class TopicsTable extends React.Component {
                         search={true} 
                         deleteRow={true} 
                         striped={true} 
-                        pagination={true} i
+                        pagination={true} 
                         ignoreSinglePage={true} 
                         searchPlaceholder={"Search ..."} 
                         >
