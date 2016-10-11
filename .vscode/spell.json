@@ -10,7 +10,12 @@
     "Firebase",
     "otl",
     "ES6",
-    "lodash"
+    "lodash",
+    "AUTH0",
+    "TX8ZBSraMFxg7KrCBvPjHChw8hqcSVQm",
+    "nAUTH0",
+    "dthuesen",
+    "auth0"
   ],
   "mistakeTypeToStatus": {
     "Passive voice": "Hint",

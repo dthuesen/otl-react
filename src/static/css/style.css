@@ -1,3 +1,21 @@
+body { 
+    padding-top: 22px; 
+    padding-left: 20px;
+    padding-right: 20px !IMPORTANT;
+}
+.navbar {
+    min-height: 20px;
+}
+.navbar-default {
+    background-color: #9d9d9d;
+}
+.navbar-nav>li>a {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.navbar-brand {
+    height: 20px;
+}
 .td-header {
     font-size: 11px;
     vertical-align: top;

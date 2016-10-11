@@ -1,7 +1,9 @@
-var debug = process.env.NODE_ENV !== "production";
-const path = require('path')
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const debug   = process.env.NODE_ENV !== "production";
+const path    = require('path'),
+      join    = path.join,
+      resolve = path.resolve;
+const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     context: __dirname + "/src",
@@ -23,7 +25,8 @@ module.exports = {
         // Load plain-ol' vanilla CSS
         { 
             test: /\.scss$/, 
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader") },
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+        },
         ]
     },
     // output: {
