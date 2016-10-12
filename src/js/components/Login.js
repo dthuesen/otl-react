@@ -18,9 +18,7 @@ let userIsSignedIn = function() {
     });
 }
 
-
-
-var user = firebase.auth().currentUser;
+let user = firebase.auth().currentUser;
 
 let handleSignOut = function() {
     firebase.auth().signOut().then(function() {

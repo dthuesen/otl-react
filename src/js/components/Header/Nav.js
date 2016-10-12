@@ -2,6 +2,35 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Link } from 'react-router'
 import { IndexLink } from 'react-router'
+import * as firebase from 'firebase';
+
+
+// let user = firebase.auth().currentUser;
+// let user = firebase.auth().user;
+// let user = auth.currentUser;
+// let user = firebase.auth();
+// let user = Firebase.getAuth();
+
+// console.log(Object.keys(user));
+// console.log(Object.values(user));
+
+// Object.getOwnPropertyNames(user).forEach(function(val, idx, array) {
+//   console.log(val + ' -> ' + user[val]);
+// });
+
+// if(user) {
+//   console.log(`From Nav - current user: `);
+//   console.log(Object.keys(user));
+// }
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if(user) {
+    Object.getOwnPropertyNames(user).forEach(function(val, idx, array) {
+      console.log(val + ' -> ' + user[val]);
+    });
+  }
+});
+
 
 export default class Nav extends React.Component {
   render() {
