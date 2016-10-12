@@ -3,6 +3,9 @@ body {
     padding-left: 20px;
     padding-right: 20px !IMPORTANT;
 }
+td {
+    white-space: pre-wrap !IMPORTANT;
+}
 .navbar {
     min-height: 20px;
 }
