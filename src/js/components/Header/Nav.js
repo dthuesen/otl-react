@@ -53,8 +53,8 @@ export default class Nav extends React.Component {
             <p className="navbar-text navbar-right">Nav componente</p>
             <ul className="nav navbar-nav" role="nav">
               <li className="btn btn-default"><IndexLink to="/" onlyActiveOnIndex={true}>Home</IndexLink ></li>
-              <li className="btn btn-default"><Link to="/TopicsTable">TopicsTable</Link></li>
-              
+              <li className="btn btn-default"><Link to="/topicstable">TopicsTable</Link></li>
+              <li className="btn btn-default"><Link to="/shortlist">Shortlist</Link></li>
               <li className="btn btn-default"><Link to="/login">Login</Link></li>
               <li className="btn btn-default"><Link to="/about">About</Link></li>
             </ul>  

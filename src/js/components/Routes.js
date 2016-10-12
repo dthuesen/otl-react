@@ -10,6 +10,7 @@ import About from "./About";
 import Login from "./Login";
 import Home from "./Home";
 import Layout from "./Layout";
+import Shortlist from "./Shortlist";
 
 
 
@@ -18,12 +19,12 @@ export default class Routes extends React.Component {
     return (
         <Router history={browserHistory}>
           <Route path="/" component={Layout} >
-              <IndexRoute component={ Home }/>
-              {/* Children of App */}
-                <Route path="/topicstable" component={TopicsTable} />
-                <Route path="/login" component={Login}>
-                <Route path="/about" component={About}/>
-              </Route>
+            <IndexRoute component={ Home } />
+            {/* Children of App */}
+            <Route path="/topicstable" component={TopicsTable} />
+            <Route path="/shortlist" component={Shortlist} />
+            <Route path="/login" component={Login} />
+            <Route path="/about" component={About} />
           </Route>
         </Router>
     );
