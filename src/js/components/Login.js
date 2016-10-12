@@ -11,6 +11,8 @@ let userIsSignedIn = function() {
         browserHistory.push('/topicstable')
     } else {
         // No user is signed in.
+        var errorCode = 401;
+        var errorMessage = "LOGIN/LOGOUT COMPONENT: USER NOT SIGNED IN!"
         console.log("ERROR: " + errorMessage)
         console.log(errorCode)
         console.log(errorMessage)
@@ -51,6 +53,9 @@ export default class Login extends React.Component {
             password: ""
         };
         
+    }
+    componentDidMount() {
+        console.log('Login is mounted.')
     }
 
     onChange(key, value) {

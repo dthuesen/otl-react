@@ -20,9 +20,9 @@ let userIsSignedIn = function () {
     if (user) {
         // User is signed in.
         console.log('User is signed in: ' +  user)
-        browserHistory.push('/topicstable')
     } else {
         // No user is signed in.
+        var errorCode = 401;
         var errorMessage = "ENTER TOPICSTABLE USER MUST BE LOGGED IN!";
         browserHistory.push('/login')
         console.log("ERROR: " + errorMessage)
@@ -40,6 +40,7 @@ let handleLoginLogout = function () {
         browserHistory.push('/logout')
     } else {
         // No user is signed in.
+        var errorCode = 401;
         var errorMessage = "USER NOT LOGGED IN!";
         browserHistory.push('/login')
         console.log("ERROR: " + errorMessage)
@@ -62,7 +63,7 @@ export default class Routes extends React.Component {
             <IndexRoute component={ Home } />
             {/* Children of App */}
             <Route path="/topicstable" onEnter={userIsSignedIn} component={TopicsTable} />
-            <Route path="/shortlist" component={Shortlist} />
+            <Route path="/shortlist" onEnter={userIsSignedIn} component={Shortlist} />
             <Route path="/login" onEnter={handleLoginLogout} component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/about" component={About} />

@@ -131,7 +131,11 @@ export default class TopicsTable extends React.Component {
     this.state = {
       topics: []
     }
+    
+    
+  }
 
+  componentDidMount() {
     fb.child('otlReact').on('value', (snapshot) => {
       var topicsVal = snapshot.val();
       var topics = _(topicsVal)
@@ -382,7 +386,16 @@ export default class TopicsTable extends React.Component {
     return ( 
       <div>
         {/*  <h1><b>Topics: {this.state.topics.description}</b></h1> */}
-        <h4><b>TopicsTable</b> componente</h4>
+        <div className="container">
+          <div className="row">
+            <div className="col- md-4 col-md-offset-2">
+                <h1>Open Topics List</h1>
+                <p>Check all your open topics with several clients.</p>
+            </div>
+            <br />
+          </div>
+        </div>
+        
         <BootstrapTable data={dataTopics} 
                         insertRow={true} 
                         options={options} 
