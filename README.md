@@ -31,6 +31,9 @@ Just ready features:
 * Numbering with client prefixes
 * Prefixing according to selected client in table
 * If client count in table is null a prefixed 8 digits zero count is used
+* Authentication (Login via firebase auth), but registration (no need for reg)
+* Login form if not signed in
+* Logout form if user is signed in
 
 
 TO DO:
@@ -40,7 +43,6 @@ TO DO:
 * Filter for only one client
 * Export to CSV, XLSX (styled)
 * Page styling
-* Authentication
 * User administration
 * Short list export
 * Pages: "Shortlist" (with filter), "Login"
