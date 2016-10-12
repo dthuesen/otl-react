@@ -18,8 +18,6 @@ let userIsSignedIn = function() {
     });
 }
 
-let user = firebase.auth().currentUser;
-
 let handleSignOut = function() {
     firebase.auth().signOut().then(function() {
     // Sign-out successful.
@@ -63,8 +61,7 @@ export default class Login extends React.Component {
         event.preventDefault();
         const email = this.state.email;
         const password = this.state.password;
-        console.log(`You logged in with email=${email} password=${password}`);
-        console.log(email)
+        console.log(`You logged in with email=${email}`);
         handleLogin(email, password);
     }
 
@@ -82,7 +79,14 @@ export default class Login extends React.Component {
 
         return(
             <div className="container">
+                
                 <div className="row">
+                <div className="col- md-4 col-md-offset-2">
+                    <h1 >Log in</h1>
+                    <p>You must be logged in for using the OTL.</p>
+                </div>
+                <br />
+                <br />
                     <form className="form-horizontal" onSubmit={ev => this.onSubmit(ev)}>
                         
                         <div className="form-group" >
@@ -104,14 +108,6 @@ export default class Login extends React.Component {
                             </div>
                         </div>
                     </form>
-                </div>
-                <div className="row">
-                    <div className="row">
-                        <div className="form-group">
-                            <div className="col-md-offset-2 col-md-4">
-                                <button className="btn btn-link btn-block" onClick={handleSignOut}>Log Out</button>                        </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 

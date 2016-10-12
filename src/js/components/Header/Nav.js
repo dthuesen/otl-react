@@ -23,16 +23,18 @@ import * as firebase from 'firebase';
 //   console.log(Object.keys(user));
 // }
 
-firebase.auth().onAuthStateChanged(function(user) {
-  if(user) {
-    Object.getOwnPropertyNames(user).forEach(function(val, idx, array) {
-      console.log(val + ' -> ' + user[val]);
-    });
-  }
-});
-
 
 export default class Nav extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      userLoggedIn: false,
+      logInButtonText: 'Log in'
+    }
+  }
+  
+
+
   render() {
     return ( 
       <div className="navbar navbar-default">
