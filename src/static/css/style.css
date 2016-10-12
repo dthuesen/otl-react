@@ -6,6 +6,12 @@ body {
 td {
     white-space: pre-wrap !IMPORTANT;
 }
+.react-bs-table table td, .react-bs-table table th {
+    overflow: hidden;
+    white-space: pre-wrap !IMPORTANT;
+    text-overflow: ellipsis;
+}
+
 .navbar {
     min-height: 20px;
 }
