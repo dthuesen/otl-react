@@ -414,7 +414,7 @@ export default class TopicsTable extends React.Component {
               value={ value }
               orentation="horizontal"
               min={0}
-              max={250}
+              max={150}
               step={1}
               onChange={this.handleSliderChange}
             />
