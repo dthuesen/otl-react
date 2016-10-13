@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import * as firebase from 'firebase';
+import Slider from 'react-rangeslider';
 import _ from 'lodash';
+import moment from 'moment';
 
 // Firebase
 const fbconfig = {
@@ -125,14 +127,12 @@ var shortListType = {
 
 export default class TopicsTable extends React.Component {
 
-  constructor(props) {
-    super(props);
-
+  constructor(props, context) {
+    super(props, context);
     this.state = {
-      topics: []
+      topics: [],
+      value: 5 /* Start value for rageslider */
     }
-    
-    
   }
 
   componentDidMount() {
@@ -153,7 +153,17 @@ export default class TopicsTable extends React.Component {
     });
   }
 
+  handleSliderChange = (value) => {
+    this.setState({
+      value: value
+    });
+  }
+
   render() {
+
+    moment.locale('de');
+    console.log("moment.locale(): ");
+    console.log(moment.locale());
 
     var now = new Date();
     var month = now.getMonth();    9 // liefert 0 - 11
@@ -161,8 +171,14 @@ export default class TopicsTable extends React.Component {
     var day = now.getDate();     2 // liefert 1 - 31
     var minutes = now.getMinutes(); 
     var hour = now.getHours();    13 // liefert 0 - 23
-    var actualDate = day + "." + month + "." + year + ", " + hour + ":" + minutes + " h";
+    // var actualDate = year + "-" + month + "-" + day + "--" + hour + ":" + minutes + " time";
     const dataTopics = this.state.topics;
+
+    let actualDate = moment().format('YYYY-MM-DD, kk:mm:ss');
+    console.log("actualDate: ");
+    console.log(actualDate);
+
+    let { value } = this.state;
 
 
     // functions for table manipulation
@@ -193,14 +209,13 @@ export default class TopicsTable extends React.Component {
       updateTopic();
     }
 
-    // !!!!! TODO: filter for client prefixes and then getting last number count  
-    // !!!!!       for new selection and switching to that prefix in this row (or similar)                                           
-    // !!!!! ------------------------------------------------------------------------------
+    // !!!!! TODO: Change prefix of specific number count when client changes with select input         
+    // !!!!! ----------------------------------------------------------------------------------
 
     
     function onAfterInsertRow(row) {
 
-      // TODO: retrieving client selection from input
+      // Retrieving client selection from input
       console.log("cotent of 'row': ");
       console.log(row);
       let client = row.client;
@@ -243,7 +258,6 @@ export default class TopicsTable extends React.Component {
         default:
             console.log("NO MATCHING CLIENT!!!!!");
       }  
-         
 
       // Grabbing the table 'otlReact'
       let otlReact = fb.child('otlReact');
@@ -371,7 +385,6 @@ export default class TopicsTable extends React.Component {
       onSelect: onRowSelect,
       onSelectAll: onSelectAll
     };    
-
     const options = {
       afterInsertRow: onAfterInsertRow,
       onDeleteRow: handleOnDeleteRow,
@@ -381,7 +394,7 @@ export default class TopicsTable extends React.Component {
       hideSizePerPage: false,
       sizePerPageList: [3, 5, 10, 15, 25, 40, 60],
       clearSearch: true,
-      sizePerPage: 25
+      sizePerPage: this.state.value
     }
     return ( 
       <div>
@@ -395,6 +408,20 @@ export default class TopicsTable extends React.Component {
             <br />
           </div>
         </div>
+        <div className="col- md-1 col-md-offset-10">
+          <div className="horizontal-slider">
+            <Slider 
+              value={ value }
+              orentation="horizontal"
+              min={0}
+              max={250}
+              step={1}
+              onChange={this.handleSliderChange}
+            />
+            <div className="value">Number of listed topics: { value }</div>
+          </div>
+        </div>
+        
         
         <BootstrapTable data={dataTopics} 
                         insertRow={true} 

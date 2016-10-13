@@ -40,3 +40,85 @@ td {
     margin-left: 20px;
     margin-right: 20px;
 }
+
+/**
+* Rangeslider
+*/
+.rangeslider {
+    margin: 20px 0;
+    position: relative;
+    background: #e6e6e6; 
+}
+.rangeslider__fill, .rangeslider__handle {
+    position: absolute;
+}
+.rangeslider__fill .rangeslider__handle.rangeslider__fill {
+    display: block;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+.rangeslider__handle {
+    background: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    display: inline-block;
+    position: absolute; 
+    border-radius: 0px;
+}
+.rangeslider__handle:active {
+    background: #999;
+}
+
+/**
+* Rangeslider - Horizontal slider
+*/
+.rangeslider-horizontal {
+    text-align: right;
+    height: 5px;
+    border-radius: 0px; 
+    width: 250px;
+}
+.rangeslider__fill {
+    height: 100%;
+    background: #b2b2b2;
+    border-radius: 10px;
+    top: 0;
+}
+.rangeslider__handle {
+    width: 15px !IMPORTANT;
+    height: 15px !IMPORTANT;
+    border-radius: 40px;
+    top: -6.5px;
+}
+
+/**
+* Rangeslider - Vertical slider
+*/
+.rangeslider-vertical {
+    margin: 20px auto;
+    height: 150px;
+    max-width: 10px;
+    background: none; 
+}
+.rangeslider__fill {
+    width: 100%;
+    background: #b2b2b2;
+    box-shadow: none;
+    bottom: 0;
+}
+.rangeslider__handle {
+    width: 30px;
+    height: 10px;
+    left: -10px; 
+}
+.rangeslider__handle:active {
+    box-shadow: none;
+}
+
+.value {
+    color: #9d9d9d;
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 25px;
+    padding-right: 20px;
+    line-height: 12px
+}
