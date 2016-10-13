@@ -125,13 +125,15 @@ var shortListType = {
 };
 
 
+
 export default class TopicsTable extends React.Component {
 
   constructor(props, context) {
     super(props, context);
     this.state = {
       topics: [],
-      value: 5 /* Start value for rageslider */
+      value: 5, /* Start value for rageslider */
+      shortList: "YES",
     }
   }
 
@@ -268,6 +270,8 @@ export default class TopicsTable extends React.Component {
       // Getting the new row
       var newRow = row;
       newRow.createdAt = actualDate;
+      newRow.shortList = "YES";
+      newRow.state = "NEW"
 
       // Write the new post's data simultaneously in the posts list and the user's post list.
       var updates = {};
@@ -371,6 +375,29 @@ export default class TopicsTable extends React.Component {
           });
       });
     }
+    // function colorFormatter(cell, row){
+    //   console.log(cell);
+    //     switch (cell) {
+    //       case "TRIVIAL":
+    //         style={ color: "grey"};
+    //         break;
+    //       case "MINOR":
+    //         style={ color: "green"};
+    //         break;
+    //       case "MAJOR":
+    //         style={ color: "blue"};
+    //         break;
+    //       case "CRITICAL":
+    //         style={ color: "orange"};
+    //         break;
+    //       case "BLOCKER":
+    //         style={ color: "red"};
+    //         break;
+        
+    //       default:
+    //         break;
+    //     }
+    //   }
     
     // PROPERTIES AND OPTIONS
     var cellEditProp = {
@@ -396,6 +423,8 @@ export default class TopicsTable extends React.Component {
       clearSearch: true,
       sizePerPage: this.state.value
     }
+
+
     return ( 
       <div>
         {/*  <h1><b>Topics: {this.state.topics.description}</b></h1> */}
