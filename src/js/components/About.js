@@ -51,6 +51,9 @@ export default class About extends React.Component {
                                     <li>Login form if not signed in</li>
                                     <li>Logout form if user is signed in</li>
                                     <li>About page (this) is done</li>
+                                    <li>Color coding of columns (Category, Prio, State, Cost Model)</li>
+                                    <li>Hiding of not selected rows</li>
+                                    <li>Export to CSV</li>
                                 </ul>
                             <br />
                             <h3>What's on the roadmap</h3>

@@ -34,14 +34,16 @@ Just ready features:
 * Authentication (Login via firebase auth), but registration (no need for reg)
 * Login form if not signed in
 * Logout form if user is signed in
+* Color coding of columns (Category, Prio, State, Cost Model)
+* Hiding of not selected rows
+* Export to CSV
 
 
 TO DO:
 * Changing prefix if client selection on topic changes
-* Color coding of columns (Category, Prio, State, Cost Model)
 * Collapsing/hiding rows
 * Filter for only one client
-* Export to CSV, XLSX (styled)
+* Export to CSV, XLSX with styles
 * Page styling
 * User administration
 * Short list export

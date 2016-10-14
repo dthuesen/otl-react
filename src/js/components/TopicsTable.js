@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import Slider from 'react-rangeslider';
 import _ from 'lodash';
 import moment from 'moment';
+import $ from 'jquery';
 
 // Firebase
 const fbconfig = {
@@ -127,6 +128,7 @@ var shortListType = {
 let td = document.getElementsByTagName("td");
 
 
+
 export default class TopicsTable extends React.Component {
 
   constructor(props, context) {
@@ -156,6 +158,17 @@ export default class TopicsTable extends React.Component {
         topics: topics
       });
     });
+
+    
+    $(document).ready(function() {
+        var td = $("td");
+        console.log("doc is ready");
+        console.log("mousemove");
+        
+        td.mousemove(function(){
+          $( "td:contains('CRITICAL')" ).css( {"color": "OrangeRed", "font-weight": "bold"} );
+        })
+    });
   }
 
   handleSliderChange = (value) => {
@@ -163,6 +176,7 @@ export default class TopicsTable extends React.Component {
       value: value
     });
   }
+   
 
   render() {
 
@@ -191,6 +205,8 @@ export default class TopicsTable extends React.Component {
       console.log("Is minimum one row selected?: ")
       if(isSelected) { console.log("YES"); } else { console.log("NO"); }
     }
+      
+
 
     function onSelectAll(isSelected){
       console.log("Are all rows selected?: ");
@@ -261,18 +277,6 @@ export default class TopicsTable extends React.Component {
             break;
         default:
             console.log("NO MATCHING CLIENT!!!!!");
-      }  
-
-      let prioCell = row.prio;
-      console.log(prioCell);
-      let outer = prioCell.node;
-      console.log(outer);
-      switch(prioCell) {
-        case "CRITICAL":
-          outer.style.color = "red"
-          break;
-        default:
-            console.log("NO MATCHING PRIO!!!!!");
       }
 
       // Grabbing the table 'otlReact'
@@ -389,6 +393,32 @@ export default class TopicsTable extends React.Component {
           });
       });
     }
+    function afterTableComplete() {
+      var td = $("td");
+      $( "td:contains('CRITICAL')" ).css( {"color": "OrangeRed", "font-weight": "bold"} );
+      $( "td:contains('TRIVIAL')" ).css( {"color": "grey", "font-weight": "normal"});
+      $( "td:contains('MINOR')" ).css( {"color": "DeepSkyBlue"} );
+      $( "td:contains('MAJOR')" ).css( {"color": "GoldenRod", "font-weight": "bold"});
+      $( "td:contains('FEATURE')" ).css( {"color": "DeepSkyBlue"} );
+      $( "td:contains('IMPROVEMENT')" ).css( {"color": "LimeGreen"} );
+      $( "td:contains('BUG')" ).css( {"color": "red"} );
+      $( "td:contains('PROJECT')" ).css( {"color": "DarkSlateGray"} );
+      $( "td:contains('STOPPED')" ).css( {"color": "DarkGray"} );
+      $( "td:contains('NEW')" ).css( {"background-color": "PowderBlue"} );
+      $( "td:contains('TO-DO')" ).css( {"background-color": "PaleGoldenRod", "color": "DarkGray" } );
+      $( "td:contains('ANALYSIS')" ).css( {"background-color": "Silver"} );
+      $( "td:contains('IN PROGRESS')" ).css( {"background-color": "Khaki"} );
+      $( "td:contains('OPEN')" ).css( {"color": "white", "background-color": "Red"} );
+      $( "td:contains('QA')" ).css( {"background-color": "Aquamarine"} );
+      $( "td:contains('DONE')" ).css( {"background-color": "OliveDrab", "color": "white"} );
+      $( "td:contains('REJECTED')" ).css( {"background-color": "Thistle"} );
+      $( "td:contains('CRITICAL')" ).css( {"color": "OrangeRed", "font-weight": "bold"} );
+      $( "td:contains('BLOCKER')" ).css( {"color": "FireBrick", "font-weight": "bold"} );
+      $( "td:contains('YES')" ).css( {"background-color": "YellowGreen", "font-weight": "bold", "color": "white"} );
+      $( "td:contains('no')" ).css( {"background-color": "inherit", "font-weight": "bold", "color": "DarkGray"} );
+      $( "td:contains('CLIENT-PROJECT')" ).css( {"color": "darkslategray", "font-weight": "bold"} );
+      $( "td:contains('COST-SHARING')" ).css( {"color": "darkslategray", "font-weight": "bold"} );
+    }
     // function colorFormatter(cell, row, formatExtraData, rowIdx){
       
     //   // let innerText = td.innerText;
@@ -417,6 +447,8 @@ export default class TopicsTable extends React.Component {
     //   //       break;
     //   //   }
     //   }
+   
+    
     
     // PROPERTIES AND OPTIONS
     var cellEditProp = {
@@ -441,10 +473,13 @@ export default class TopicsTable extends React.Component {
       hideSizePerPage: false,
       sizePerPageList: [3, 5, 10, 15, 25, 40, 60],
       clearSearch: true,
-      sizePerPage: this.state.value
+      sizePerPage: this.state.value,
+      afterTableComplete: afterTableComplete
     }
 
-
+    
+    
+    
     return ( 
       <div>
         {/*  <h1><b>Topics: {this.state.topics.description}</b></h1> */}
