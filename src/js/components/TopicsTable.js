@@ -124,6 +124,7 @@ var shortListType = {
   "no": "no"
 };
 
+let td = document.getElementsByTagName("td");
 
 
 export default class TopicsTable extends React.Component {
@@ -136,6 +137,8 @@ export default class TopicsTable extends React.Component {
       shortList: "YES",
     }
   }
+
+  
 
   componentDidMount() {
     fb.child('otlReact').on('value', (snapshot) => {
@@ -181,7 +184,6 @@ export default class TopicsTable extends React.Component {
     console.log(actualDate);
 
     let { value } = this.state;
-
 
     // functions for table manipulation
     function onRowSelect(row, isSelected){
@@ -260,6 +262,18 @@ export default class TopicsTable extends React.Component {
         default:
             console.log("NO MATCHING CLIENT!!!!!");
       }  
+
+      let prioCell = row.prio;
+      console.log(prioCell);
+      let outer = prioCell.node;
+      console.log(outer);
+      switch(prioCell) {
+        case "CRITICAL":
+          outer.style.color = "red"
+          break;
+        default:
+            console.log("NO MATCHING PRIO!!!!!");
+      }
 
       // Grabbing the table 'otlReact'
       let otlReact = fb.child('otlReact');
@@ -375,28 +389,33 @@ export default class TopicsTable extends React.Component {
           });
       });
     }
-    // function colorFormatter(cell, row){
-    //   console.log(cell);
-    //     switch (cell) {
-    //       case "TRIVIAL":
-    //         style={ color: "grey"};
-    //         break;
-    //       case "MINOR":
-    //         style={ color: "green"};
-    //         break;
-    //       case "MAJOR":
-    //         style={ color: "blue"};
-    //         break;
-    //       case "CRITICAL":
-    //         style={ color: "orange"};
-    //         break;
-    //       case "BLOCKER":
-    //         style={ color: "red"};
-    //         break;
+    // function colorFormatter(cell, row, formatExtraData, rowIdx){
+      
+    //   // let innerText = td.innerText;
+    //   // console.log(td);
+    //   // console.log(innerText);
+
+    //   // console.log(cell);
+    //   //   switch (cell) {
+    //   //     case "TRIVIAL":
+    //   //       style="color: grey";
+    //   //       break;
+    //   //     case "MINOR":
+    //   //       style={ color: "green"};
+    //   //       break;
+    //   //     case "MAJOR":
+    //   //       style={ color: "blue"};
+    //   //       break;
+    //   //     case "CRITICAL":
+    //   //       style={ color: "orange"};
+    //   //       break;
+    //   //     case "BLOCKER":
+    //   //       style={ color: "red"};
+    //   //       break;
         
-    //       default:
-    //         break;
-    //     }
+    //   //     default:
+    //   //       break;
+    //   //   }
     //   }
     
     // PROPERTIES AND OPTIONS
@@ -410,7 +429,8 @@ export default class TopicsTable extends React.Component {
       clickToSelect: true,
       bgColor: "rgb(238, 193, 213)",
       onSelect: onRowSelect,
-      onSelectAll: onSelectAll
+      onSelectAll: onSelectAll,
+      showOnlySelected: true
     };    
     const options = {
       afterInsertRow: onAfterInsertRow,
@@ -460,7 +480,11 @@ export default class TopicsTable extends React.Component {
                         cellEdit={cellEditProp} 
                         selectRow={selectRowProp} 
                         search={true} 
+                        hover={true}
+                        condensed={true}
                         deleteRow={true} 
+                        multiColumnSearch={true}
+                        exportCSV={true}
                         striped={true} 
                         pagination={true} 
                         ignoreSinglePage={true} 
