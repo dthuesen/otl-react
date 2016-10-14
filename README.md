@@ -37,6 +37,7 @@ Just ready features:
 * Color coding of columns (Category, Prio, State, Cost Model)
 * Hiding of not selected rows
 * Export to CSV
+* First version of short list export via showing only selected rows
 
 
 TO DO:
@@ -49,4 +50,5 @@ TO DO:
 * Short list export
 * Pages: "Shortlist" (with filter), "Login"
 * Focus on first form field in form for new topic
+* Storing data related to user, or group of user
 
