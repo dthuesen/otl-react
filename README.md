@@ -13,6 +13,7 @@ Built with:
 * react-bootstrap-table
 * lodash
 * jQuery
+* Moment.JS
 * and many more...
 
 Just ready features:
@@ -38,6 +39,9 @@ Just ready features:
 * Hiding of not selected rows
 * Export to CSV
 * First version of short list export via showing only selected rows
+* Filter for topics on shortlist
+* Filter for topics on cClient
+* Pagination shows total
 
 
 TO DO:
