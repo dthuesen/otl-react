@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+// Logout timer Component
+import TimoutLogout from './TimeoutLogout'
+
+
 import * as firebase from 'firebase';
 import Slider from 'react-rangeslider';
 import _ from 'lodash';
@@ -20,8 +24,7 @@ const fireb = firebase
   .initializeApp(fbconfig)
   .database();
 
-const fb = fireb
-  .ref();
+const fb = fireb.ref();
 
 
 // ract-bootstrap-table from allenfang.github.io/react-bootstrap-table/start.html
@@ -460,14 +463,14 @@ export default class TopicsTable extends React.Component {
 
     return (
       <div>
-        {/*  <h1><b>Topics: {this.state.topics.description}</b></h1> */}
+        {/* Timer for automatic logout */}
+        < TimoutLogout />
         <div className="container">
           <div className="row">
             <div className="col- md-4 col-md-offset-2">
               <h1>Open Topics List</h1>
               <p>Check all your open topics with several clients.</p>
             </div>
-            <br />
           </div>
         </div>
         <div className="col- md-1 col-md-offset-10">

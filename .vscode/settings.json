@@ -5,5 +5,5 @@
     "editor.tabSize": 2,
     // Fügt Codeausschnitte ein, wenn ihr Präfix übereinstimmt. Funktioniert am besten, wenn "quickSuggestions" nicht aktiviert sind.
     "editor.tabCompletion": false,
-    ,
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }

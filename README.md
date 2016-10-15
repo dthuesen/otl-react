@@ -40,14 +40,14 @@ Just ready features:
 * Export to CSV
 * First version of short list export via showing only selected rows
 * Filter for topics on shortlist
-* Filter for topics on cClient
+* Filter for topics on Client
 * Pagination shows total
+* Automatic logout after x minutes
 
 
 TO DO:
 * Changing prefix if client selection on topic changes
 * Collapsing/hiding rows
-* Filter for only one client
 * Export to CSV, XLSX with styles
 * Page styling
 * User administration

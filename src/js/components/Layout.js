@@ -2,6 +2,9 @@ import React from "react";
 import { Router, Route, hashHistory, IndexRoute } from 'react-router'
 import * as firebase from 'firebase';
 
+// Logout timer Component
+import TimoutLogout from './TimeoutLogout'
+
 
 // Composing
 import Header from "./Header"
@@ -13,7 +16,7 @@ import Content from "./Content";
 export default class Layout extends React.Component {
   constructor(props) {
     super(props);
-    
+
   }
 
   render() {
@@ -24,6 +27,7 @@ export default class Layout extends React.Component {
     return (
       <div className="container-layout">
         <Header />
+
         <div >
           {children}
         </div>
