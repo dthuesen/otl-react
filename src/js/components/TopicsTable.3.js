@@ -6,98 +6,13 @@ import { fb } from "./FireBaseConfig"
 // Logout timer Component
 import TimoutLogout from './TimeoutLogout'
 
-
-// import * as firebase from 'firebase';
 import Slider from 'react-rangeslider';
 import _ from 'lodash';
 import moment from 'moment';
 import $ from 'jquery';
 
-// Firebase
-// const fbconfig = {
-//   apiKey: "AIzaSyBG6RABAtYE_59MiD9j2-L_Z4C5i3rJOZY",
-//   authDomain: "otl-react.firebaseapp.com",
-//   databaseURL: "https://otl-react.firebaseio.com",
-//   storageBucket: "otl-react.appspot.com",
-//   messagingSenderId: "531210504974"
-// };
-
-// const fireb = firebase
-//   .initializeApp(fbconfig)
-//   .database();
-
-// const fb = fireb.ref();
-
-
 // ract-bootstrap-table from allenfang.github.io/react-bootstrap-table/start.html
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
-
-// static topics for table
-const staticTopics = [
-  {
-    id: 1,
-    "shortList": "YES",
-    "no": 1,
-    "summary": "Ein Feature wenn das Passwort vergessen wurde",
-    "description": 'Die User haben keine Möglichkeit ihr Passwort neu anzufordern. Bitte eine "Passwort vergessen" Funktion einbauen',
-    "option": "Ein optionaler Text",
-    "component": "SocialCom",
-    "category": "FEATURE",
-    "prio": "TRIVIAL",
-    "responsive": "PO",
-    "state": "TO-DO",
-    "costModel": "COST SHARING",
-    "affectsVersion": "1.2.2.1",
-    "issueTicket": "SC-1234",
-    "ticketText": "This is the place for the ticket text. The ticket text is in english.",
-    "notes": "Notizen, die sonst nirgendwo rein passen",
-    "inSprint": "aktuell",
-    "updatedAt": "24. Jun 2016",
-    "client": "O2"
-  },
-  {
-    id: 2,
-    "shortList": "no",
-    "no": 2,
-    "summary": "Ein Feature wenn das Passwort vergessen wurde",
-    "description": 'Die User haben keine Möglichkeit ihr Passwort neu anzufordern. Bitte eine "Passwort vergessen" Funktion einbauen',
-    "option": "Ein optionaler Text",
-    "component": "SocialCom",
-    "category": "FEATURE",
-    "prio": "TRIVIAL",
-    "responsive": "PO",
-    "state": "TO-DO",
-    "costModel": "COST SHARING",
-    "affectsVersion": "1.2.2.1",
-    "issueTicket": "SC-1234",
-    "ticketText": "This is the place for the ticket text. The ticket text is in english.",
-    "notes": "Notizen, die sonst nirgendwo rein passen",
-    "inSprint": "aktuell",
-    "updatedAt": "24. Jun 2016",
-    "client": "O2"
-  },
-  {
-    id: 304,
-    "shortList": "YES",
-    "no": 56,
-    "summary": "Ein Feature wenn das Passwort vergessen wurde",
-    "description": 'Die User haben keine Möglichkeit ihr Passwort neu anzufordern. Bitte eine "Passwort vergessen" Funktion einbauen',
-    "option": "Ein optionaler Text",
-    "component": "SocialCom",
-    "category": "FEATURE",
-    "prio": "TRIVIAL",
-    "responsive": "PO",
-    "state": "TO-DO",
-    "costModel": "COST SHARING",
-    "affectsVersion": "1.2.2.1",
-    "issueTicket": "SC-1234",
-    "ticketText": "This is the place for the ticket text. The ticket text is in english.",
-    "notes": "Notizen, die sonst nirgendwo rein passen",
-    "inSprint": "aktuell",
-    "updatedAt": "24. Jun 2016",
-    "client": "O2"
-  }
-];
 
 
 // Variables for pulldowns
@@ -175,15 +90,15 @@ export default class TopicsTable extends React.Component {
     });
 
 
-    $(document).ready(function () {
-      var td = $("td");
-      console.log("doc is ready");
-      console.log("mousemove");
+    // $(document).ready(function () {
+    //   var td = $("td");
+    //   console.log("doc is ready");
+    //   console.log("mousemove");
 
-      td.mousemove(function () {
-        $("td:contains('CRITICAL')").css({ "color": "OrangeRed", "font-weight": "bold" });
-      })
-    });
+    //   td.mousemove(function () {
+    //     $("td:contains('CRITICAL')").css({ "color": "OrangeRed", "font-weight": "bold" });
+    //   })
+    // });
   }
 
   handleSliderChange = (value) => {
@@ -409,7 +324,7 @@ export default class TopicsTable extends React.Component {
     }
 
     function afterTableComplete() {
-      var td = $("td");
+      let td = $("td");
       $("td:contains('CRITICAL')").css({ "color": "OrangeRed", "font-weight": "bold" });
       $("td:contains('TRIVIAL')").css({ "color": "grey", "font-weight": "normal" });
       $("td:contains('MINOR')").css({ "color": "DeepSkyBlue" });
@@ -481,7 +396,7 @@ export default class TopicsTable extends React.Component {
               value={value}
               orentation="horizontal"
               min={0}
-              max={150}
+              max={100}
               step={1}
               onChange={this.handleSliderChange}
               />
