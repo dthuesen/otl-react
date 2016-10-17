@@ -37,6 +37,7 @@ export default class About extends React.Component {
                                 <li>Sorting columns</li>
                                 <li>Selecting rows</li>
                                 <li>Deleting rows</li>
+                                <li>browserHistory instead of hashHistory for a nice URL path</li>
                                 <li>Automatic date for "Updated at"</li>
                                 <li>Pagination</li>
                                 <li>Select for size of page (as context for pagination)</li>
@@ -59,6 +60,9 @@ export default class About extends React.Component {
                                 <li>Filter for topics on shortlist</li>
                                 <li>Filter for topics on cClient</li>
                                 <li>Pagination shows total</li>
+                                <li>Automatic logout after x minutes</li>
+                                <li>Navigation now switches button between "Login" when user is not sigend in and "Logout"  when user is signed in</li>
+                                <li>Some more column filters</li>
                             </ul>
                             <br />
                             <h3>What's on the roadmap</h3>
