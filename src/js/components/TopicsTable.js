@@ -96,6 +96,7 @@ var componentTypes = [
 var categoryTypes = [
   "NA", "FEATURE", "BUG", "IMPROVEMENT", "PROJECT", "STOPPED"
 ];
+
 var priorityTypes = [
   "TRIVIAL", "MINOR", "MAJOR", "CRITICAL", "BLOCKER"
 ];
@@ -124,6 +125,36 @@ var clientsFilter = {
 var shortListType = {
   "YES": "YES",
   "no": "no"
+};
+var filterCategoryTypes = {
+  "NA":"NA", 
+  "FEATURE":"FEATURE", 
+  "BUG":"BUG", 
+  "IMPROVEMENT":"IMPROVEMENT", 
+  "PROJECT":"PROJECT", 
+  "STOPPED":"STOPPED"
+};
+var filterCategoryTypes = {
+  "NA":"NA", 
+  "FEATURE":"FEATURE", 
+  "BUG":"BUG", 
+  "IMPROVEMENT":"IMPROVEMENT", 
+  "PROJECT":"PROJECT", 
+  "STOPPED":"STOPPED"
+};
+var filterPriorityTypes = {
+  "TRIVIAL":"TRIVIAL", "MINOR":"MINOR", "MAJOR":"MAJOR", "CRITICAL":"CRITICAL", "BLOCKER":"BLOCKER"
+};
+var filterResponsiveTypes = {
+  "PO":"PO", 
+  "PL":"PL", 
+  "QM":"QM"
+};
+var filterStateTypes = {
+  "NEW":"NEW", "TO-DO":"TO-DO", "ANALYSIS":"ANALYSIS", "OPEN":"OPEN", "IN PROGRESS":"IN PROGRESS", "QA":"QA", "DONE":"DONE", "REJECTED":"REJECTED"
+};
+var filterCostModelTypes = {
+  "ROADMAP":"ROADMAP", "COST-SHARING":"COST-SHARING", "CLIENT PROJECT":"CLIENT PROJECT"
 };
 
 let td = document.getElementsByTagName("td");
@@ -177,6 +208,7 @@ export default class TopicsTable extends React.Component {
       value: value
     });
   }
+
 
 
   render() {
@@ -421,6 +453,7 @@ export default class TopicsTable extends React.Component {
       $("td:contains('CLIENT-PROJECT')").css({ "color": "darkslategray", "font-weight": "bold" });
       $("td:contains('COST-SHARING')").css({ "color": "darkslategray", "font-weight": "bold" });
     }
+    
 
     // PROPERTIES AND OPTIONS
     var cellEditProp = {
@@ -476,7 +509,6 @@ export default class TopicsTable extends React.Component {
           </div>
         </div>
 
-
         <BootstrapTable data={dataTopics}
           insertRow={true}
           options={options}
@@ -496,17 +528,18 @@ export default class TopicsTable extends React.Component {
           ignoreSinglePage={true}
           searchPlaceholder={"Search ..."}
           noDataText={"-"}
+          cleanFiltered
           >
           <TableHeaderColumn width="70" filter={{ type: 'SelectFilter', options: shortListType }} dataField="shortList" dataSort={true} editable={{ type: 'select', options: { values: choseShortlist } }} hiddenOnInsert={true} >Short List</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="number" dataSort={true} hiddenOnInsert={true} editable={false} >#</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="summary" headerAlign="left" dataSort={true} editable={{ type: 'textarea' }} >Summary</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="option" dataSort={true} editable={{ type: 'textarea' }} >Optional Comments</TableHeaderColumn>
           <TableHeaderColumn width="80" dataField="component" headerAlign="left" dataSort={true} editable={{ type: 'select', options: { values: componentTypes } }} >Affected Component</TableHeaderColumn>
-          <TableHeaderColumn width="76" dataField="category" dataSort={true} editable={{ type: 'select', options: { values: categoryTypes } }} >Category</TableHeaderColumn>
-          <TableHeaderColumn width="76" dataField="prio" dataSort={true} editable={{ type: 'select', options: { values: priorityTypes } }} >Priority</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="responsive" dataSort={true} editable={{ type: 'select', options: { values: responsiveTypes } }} >Resp. Role</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="state" dataSort={true} editable={{ type: 'select', options: { values: stateTypes } }} hiddenOnInsert={true} >State</TableHeaderColumn>
-          <TableHeaderColumn width="70" dataField="costModel" dataSort={true} editable={{ type: 'select', options: { values: costModelTypes } }} >Cost Model</TableHeaderColumn>
+          <TableHeaderColumn width="76" filter={{ type: 'SelectFilter', options: filterCategoryTypes }} dataField="category" dataSort={true} editable={{ type: 'select', options: { values: categoryTypes } }} >Category</TableHeaderColumn>
+          <TableHeaderColumn width="76" filter={{ type: 'SelectFilter', options: filterPriorityTypes }} dataField="prio" dataSort={true} editable={{ type: 'select', options: { values: priorityTypes } }} >Priority</TableHeaderColumn>
+          <TableHeaderColumn width="70" filter={{ type: 'SelectFilter', options: filterResponsiveTypes }} dataField="responsive" dataSort={true} editable={{ type: 'select', options: { values: responsiveTypes } }} >Resp. Role</TableHeaderColumn>
+          <TableHeaderColumn width="70" filter={{ type: 'SelectFilter', options: filterStateTypes }} dataField="state" dataSort={true} editable={{ type: 'select', options: { values: stateTypes } }} hiddenOnInsert={true} >State</TableHeaderColumn>
+          <TableHeaderColumn width="70" filter={{ type: 'SelectFilter', options: filterCostModelTypes }} dataField="costModel" dataSort={true} editable={{ type: 'select', options: { values: costModelTypes } }} >Cost Model</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="affectsVersion" dataSort={true} hiddenOnInsert={true} >Affects Version</TableHeaderColumn>
           <TableHeaderColumn width="70" dataField="issueTicket" dataSort={true} hiddenOnInsert={true} >Ticket in JIRA</TableHeaderColumn>
           <TableHeaderColumn width="190" dataField="ticketText" dataSort={true} editable={{ type: 'textarea' }} hiddenOnInsert={true} >Ticket Text</TableHeaderColumn>
