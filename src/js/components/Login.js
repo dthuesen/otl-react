@@ -83,7 +83,7 @@ export default class Login extends React.Component {
         const onPasswordChange = ev => this.onChange('password', ev.target.value);
 
         return(
-            <div className="container">
+            <div className="container" name={"loginComp"}>
                 
                 <div className="row">
                 <div className="col- md-4 col-md-offset-2">

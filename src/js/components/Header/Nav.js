@@ -3,41 +3,31 @@ import ReactDOM from "react-dom";
 import { Link } from 'react-router'
 import { IndexLink } from 'react-router'
 import * as firebase from 'firebase';
-
-
-// let user = firebase.auth().currentUser;
-// let user = firebase.auth().user;
-// let user = auth.currentUser;
-// let user = firebase.auth();
-// let user = Firebase.getAuth();
-
-// console.log(Object.keys(user));
-// console.log(Object.values(user));
-
-// Object.getOwnPropertyNames(user).forEach(function(val, idx, array) {
-//   console.log(val + ' -> ' + user[val]);
-// });
-
-// if(user) {
-//   console.log(`From Nav - current user: `);
-//   console.log(Object.keys(user));
-// }
+//import { fbconfig } from "../FireBaseConfig"
+import { fb } from "../FireBaseConfig"
 
 
 export default class Nav extends React.Component {
   constructor() {
     super();
     this.state = {
-      userLoggedIn: false,
-      logInButtonText: 'Log in'
-    }
+      logInButtonText: "Login",
+      };
   }
   
 
-
   render() {
+
+    var user = firebase.auth().currentUser;
+    console.log("user:");
+    console.log(user);
+
     return ( 
+     
+      
+
       <div className="navbar navbar-default">
+        
         <div className="container-fluid">
           {/* Brand and toggle get grouped for better mobile display */}
           <div className="navbar-header">
@@ -57,7 +47,10 @@ export default class Nav extends React.Component {
               <li className="btn btn-default"><IndexLink to="/" onlyActiveOnIndex={true}>Home</IndexLink ></li>
               <li className="btn btn-default"><Link to="/topicstable">TopicsTable</Link></li>
               <li className="btn btn-default"><Link to="/shortlist">Shortlist</Link></li>
-              <li className="btn btn-default"><Link to="/login">Login</Link></li>
+              {user ? 
+                      <li className="btn btn-default"><Link to="/login">Logout</Link></li> : 
+                      <li className="btn btn-default"><Link to="/login">Login</Link></li>}
+              
               <li className="btn btn-default"><Link to="/about">About</Link></li>
             </ul>  
             <form className="navbar-form navbar-left">
