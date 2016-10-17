@@ -6,7 +6,6 @@ import { browserHistory } from 'react-router'
 export default class TimoutLogout extends React.Component {
   constructor() {
     super();
-
   }
   componentDidMount() {
     console.log('Component TimeoutLogout is mounted.')
@@ -23,8 +22,7 @@ export default class TimoutLogout extends React.Component {
         firebase.auth().signOut().then(function () {
           // Sign-out successful.
           console.log('User is signed out.')
-          // window.location = '/';
-          browserHistory.push('/')
+          // browserHistory.push('/')
         }, function (error) {
           // An error happened.
           console.log('Error when signing out: ')

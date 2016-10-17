@@ -140,7 +140,7 @@ export default class TopicsTable extends React.Component {
       shortList: "YES",
     }
   }
-
+  
 
 
   componentDidMount() {
@@ -180,6 +180,7 @@ export default class TopicsTable extends React.Component {
 
 
   render() {
+
 
     moment.locale('de');
     console.log("moment.locale(): ");

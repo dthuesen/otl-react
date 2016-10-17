@@ -43,7 +43,7 @@ export default class Logout extends React.Component {
         };
         
     }
-    omponentDidMount() {
+    componentDidMount() {
         console.log('logout is mounted.')
     }
 
@@ -54,7 +54,7 @@ export default class Logout extends React.Component {
     render() {
         
         return(
-            <div className="container">
+            <div className="container" name={"logoutComp"}>
             
                 <div className="row">
                     <div className="col- md-4 col-md-offset-2">
