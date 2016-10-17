@@ -8,14 +8,7 @@ import { fb } from "../FireBaseConfig"
 
 
 export default class Nav extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      logInButtonText: "Login",
-      };
-  }
   
-
   render() {
 
     var user = firebase.auth().currentUser;
@@ -23,8 +16,6 @@ export default class Nav extends React.Component {
     console.log(user);
 
     return ( 
-     
-      
 
       <div className="navbar navbar-default">
         
