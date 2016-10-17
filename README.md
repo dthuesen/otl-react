@@ -5,15 +5,16 @@ otl-react is an application for managing open topics in a client project. otl st
 This is my first private more or less serious project in JavaScript. But my focus is on learning ReactJS connected to a fitting data base.
 
 Built with: 
-* [**Node.JS**] 
-* [**ReactJS] 
-* [**Webpack**] 
-* [**Firebase DB**]
-* [**ES6/Babel**]
-* [**react-bootstrap-table**]
-* [**lodash**]
-* [**jQuery**]
-* [**Moment.JS**]
+* [**Node.JS**](https://nodejs.org/en/)
+* [**ReactJS**](https://facebook.github.io/react/) 
+* [**Webpack**](https://webpack.github.io/) 
+* [**Firebase DB**](https://firebase.google.com/)
+* [**ES6/Babel**](https://babeljs.io/)
+* [**react-bootstrap-table**](http://allenfang.github.io/react-bootstrap-table/index.html)
+* [**lodash**](https://lodash.com/)
+* [**jQuery**](http://jquery.com/)
+* [**Moment.JS**](http://momentjs.com/)
+* [**Bootstrap**](http://getbootstrap.com/)
 * and many more...
 
 Just ready features:
