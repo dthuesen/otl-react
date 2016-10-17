@@ -23,6 +23,7 @@ Just ready features:
 * Sorting columns
 * Selecting rows
 * Deleting rows
+* browserHistory instead of hashHistory for a nice URL path
 * Automatic date for "Updated at"
 * Pagination
 * Adding new row and saving new row to Database
