@@ -5,15 +5,15 @@ otl-react is an application for managing open topics in a client project. otl st
 This is my first private more or less serious project in JavaScript. But my focus is on learning ReactJS connected to a fitting data base.
 
 Built with: 
-* Node.JS 
-* ReactJS 
-* Webpack 
-* Firebase DB
-* ES6/Babel
-* react-bootstrap-table
-* lodash
-* jQuery
-* Moment.JS
+* [**Node.JS**] 
+* [**ReactJS] 
+* [**Webpack**] 
+* [**Firebase DB**]
+* [**ES6/Babel**]
+* [**react-bootstrap-table**]
+* [**lodash**]
+* [**jQuery**]
+* [**Moment.JS**]
 * and many more...
 
 Just ready features:
@@ -43,6 +43,8 @@ Just ready features:
 * Filter for topics on Client
 * Pagination shows total
 * Automatic logout after x minutes
+* Navigation now switches button between "Login" when user is not sigend in and "Logout"  when user is signed in
+* Some more column filters
 
 
 TO DO:

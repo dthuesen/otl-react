@@ -14,7 +14,7 @@ export default class TimoutLogout extends React.Component {
   render() {
 
     function timeoutLogout() {
-      let millisec = 60000 // 1 min = 60000
+      let millisec = 600000 // 1 min = 60000
       var idlefunction = function () {
         // what to do when mouse is idle
         console.log("Logout after " + millisec / 10000 + " minutes")
