@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 // Composing
-
 import TopicsTable from "./TopicsTable";
 import Content from "./Content";
 import About from "./About";

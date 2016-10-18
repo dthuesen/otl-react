@@ -68,6 +68,7 @@
     "react-bootstrap": "^0.29.5",
     "react-bootstrap-table": "^2.5.5",
     "react-dom": "^15.3.2",
+    "react-joyride": "^1.5.0",
     "react-modal": "^1.4.0",
     "react-rangeslider": "^1.0.9",
     "react-router": "^2.0.0",
