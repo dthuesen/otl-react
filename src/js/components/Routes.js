@@ -59,8 +59,8 @@ export default class Routes extends React.Component {
           <Route path="/" component={Layout} >
             <IndexRoute component={ Home } />
             {/* Children of App */}
-            <Route path="/topicstable" onEnter={userIsSignedIn} component={TopicsTable} />
-            <Route path="/shortlist" onEnter={userIsSignedIn} component={Shortlist} />
+            <Route authorize={['admin', 'pm']}  path="/topicstable" onEnter={userIsSignedIn} component={TopicsTable} />
+            <Route authorize={['client', 'admin', 'pm']} path="/shortlist" onEnter={userIsSignedIn} component={Shortlist} />
             <Route path="/login" onEnter={handleLoginLogout} component={Login} />
             <Route path="/logout" component={Logout} />
             <Route path="/about" component={About} />
