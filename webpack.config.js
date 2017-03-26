@@ -8,12 +8,12 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
     context: __dirname + "/src",
     devtool: debug ? "inline-sourcemap" : null,
-    // entry: "./js/client.js",
     entry: [
         './js/client.js'
     ],
     module: {
-        loaders: [{
+        // previous Version was "module.loader"
+        rules: [{
             test: /\.js?$/,
             exclude: /(node_modules|bower_components)/,
             loader: 'babel-loader',
@@ -25,7 +25,7 @@ module.exports = {
         // Load plain-ol' vanilla CSS
         { 
             test: /\.scss$/, 
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
         },
         ]
     },
@@ -38,8 +38,9 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/'
     },
+    // Changed from Webpack 1 to 2
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
 
     plugins: debug ? [] : [

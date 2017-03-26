@@ -4,6 +4,8 @@ otl-react is an application for managing open topics in a client project. otl st
 
 This is my first private more or less serious project in JavaScript. But my focus is on learning ReactJS connected to a fitting data base.
 
+### **Actually react-router v4.x.x does not work well, so I used v3.0.2!!**
+
 Built with: 
 * [**Node.JS**](https://nodejs.org/en/)
 * [**ReactJS**](https://facebook.github.io/react/) 
