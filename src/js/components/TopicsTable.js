@@ -18,6 +18,7 @@ import $ from 'jquery';
 // ract-bootstrap-table from allenfang.github.io/react-bootstrap-table/start.html
 import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 
+
 // static topics for table
 const staticTopics = [
   {
