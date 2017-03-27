@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 import { Link } from 'react-router'
 import { IndexLink } from 'react-router'
 import * as firebase from 'firebase';
-//import { fbconfig } from "../FireBaseConfig"
-import { fb } from "../FireBaseConfig"
+import { fb } from "../FirebaseConfig"
 
 
 export default class Nav extends React.Component {
