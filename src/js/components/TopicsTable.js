@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import { fbconfig } from "./FirebaseConfig"
 import { fb } from "./FirebaseConfig"
 
 // Logout timer Component
