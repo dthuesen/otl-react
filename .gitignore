@@ -3,3 +3,4 @@ node_modules
 src/old-server-js
 src/index-old.html
 old-package-json
+bfg.jar
